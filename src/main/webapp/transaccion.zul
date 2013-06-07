@@ -1,0 +1,41 @@
+<?page title="prueba" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<zk>
+    <window apply="${transaccionController}" id="win" >
+  		<grid width="500px">
+   			<columns>
+   				<column width="35%" />
+   				<column width="65%" />
+   			</columns>
+   			<rows>
+   			    <row>
+   			    	<cell align="center" colspan="2">
+   			    		<label value="Declaracion de transacción"></label>
+   			    	</cell>
+   			    </row>
+   				<row>
+   					<label value="Nombre" />
+   					<textbox id="txNombre" maxlength="255" width="300px" onChange="win$composer.validaGuardar();" />
+   				</row>
+   				<row>
+   					<label value="Tipo" />
+   					<combobox id="cboTipo" onChange="win$composer.validaGuardar()">
+  						<comboitem label="Ingreso" value="1" />
+   						<comboitem label="Egreso" value="2" />
+   					</combobox>
+   				</row>
+   				<row>
+   					<label value="Monto" />
+  					<intbox id="intMonto" maxlength="10" width="200px" onChange="win$composer.validaGuardar();"></intbox>
+  				</row>
+  				<row>
+   					<cell colspan="2" align="right">
+   						<button id="btnLimpiar" label="Limpiar" />
+   						<button id="btnGuardar" label="Enviar" disabled="true" onClick='alert("Funcionalidad pendiente")' />
+   					</cell>
+   				</row>
+   			</rows>
+   		</grid>
+        				
+    </window>
+</zk>

@@ -1,0 +1,28 @@
+<?page title="prueba" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<zk>
+    <window apply="${data}" id="win" >
+        <separator />
+        <separator />
+        <hlayout id="ctlhlayout">
+            <button id="revertBtn" width="100px" label="Nuevo" />
+            <button id="rmAllBtn" width="100px" label="Borrar Todos" />
+        </hlayout>
+        <separator />
+
+        <listbox id="list" rows="5" model="@{win$composer.mailData.mails}">
+	        <listhead>
+	            <listheader label="Id" sort="auto" />
+	            <listheader label="Asunto" sort="auto" />
+	            <listheader label="Fecha" sort="auto" />
+	            <listheader label="Monto" sort="auto" />
+	        </listhead>
+	        <listitem self="@{each=item}">
+	        	<listcell label="@{item.id}"></listcell>
+	        	<listcell label="@{item.subject}"></listcell>
+	        	<listcell label="@{item.date}"></listcell>
+	        	<listcell label="@{item.size}"></listcell>
+	        </listitem>
+	    </listbox>
+    </window>
+</zk>

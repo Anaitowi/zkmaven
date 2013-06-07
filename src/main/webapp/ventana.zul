@@ -1,0 +1,193 @@
+<?page title="prueba" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<zk>
+    <window apply="${ventanaController}" id="win" >
+  		<style>   
+        .nav_tabs .z-tabpanel { padding: 0; border-bottom: 0 none;}
+        .nav_tabs .z-tabpanels .z-toolbarbutton-cnt { padding: 4px;}
+        .nav_category { cursor:pointer; }
+        .nav_text { color: #696569; font-size : 24px; font-weight: bold;}
+    </style>
+    <tabbox width="100%" sclass="nav_tabs">
+        <tabs id="tabsGenerales">
+            <tab label="Resumen General" onSelect="updateCategory(self.label)"/>
+            <tab label="Trans" onSelect="updateCategory(self.label)"/>
+            <tab label="Transacciones" onSelect="updateCategory(self.label)"/>
+            <tab label="Pronosticos" onSelect="updateCategory(self.label)"/>
+        </tabs>
+        <tabpanels>
+            <tabpanel>
+                <toolbar hflex="true">
+                    <toolbarbutton label="Product 1" onClick="updateSubPage(self.label)" />
+                    <toolbarbutton label="Product 2" onClick="updateSubPage(self.label)" />
+                    <toolbarbutton label="Product 3" onClick="updateSubPage(self.label)" />
+                </toolbar>
+             </tabpanel>
+            <tabpanel>
+                <toolbar hflex="true">
+                
+                    <toolbarbutton label="Live Demo 1" onClick="updateSubPage(self.label)" />
+                    <toolbarbutton label="Live Demo 2" onClick="updateSubPage(self.label)" />
+                    <toolbarbutton label="Live Demo 3" onClick="updateSubPage(self.label)" />
+                    <toolbarbutton label="Live Demo 4" onClick="updateSubPage(self.label)" />
+                    <toolbarbutton label="Live Demo 5" onClick="updateSubPage(self.label)" />
+                    <toolbarbutton label="Live Demo 6" onClick="updateSubPage(self.label)" />
+                	<grid width="500px">
+   			<columns>
+   				<column width="35%" />
+   				<column width="65%" />
+   			</columns>
+   			<rows>
+   			    <row>
+   			    	<cell align="center" colspan="2">
+   			    		<label value="Declaracion de transacción"></label>
+   			    	</cell>
+   			    </row>
+   				<row>
+   					<label value="Nombre" />
+   					<textbox id="txNombre" maxlength="255" width="300px" onChange="win$composer.validaGuardar();" />
+   				</row>
+   				<row>
+   					<label value="Tipo" />
+   					<combobox id="cboTipo" onChange="win$composer.validaGuardar()">
+  						<comboitem label="Ingreso" value="1" />
+   						<comboitem label="Egreso" value="2" />
+   					</combobox>
+   				</row>
+   				<row>
+   					<label value="Monto" />
+  					<intbox id="intMonto" maxlength="10" width="200px" onChange="win$composer.validaGuardar();"></intbox>
+  				</row>
+  				<row>
+   					<cell colspan="2" align="right">
+   						<button id="btnLimpiar" label="Limpiar" />
+   						<button id="btnGuardar" label="Enviar" disabled="true" onClick='alert("Funcionalidad pendiente")' />
+   					</cell>
+   				</row>
+   			</rows>
+   		</grid>
+                </toolbar>
+            </tabpanel>
+            <tabpanel> 
+                <toolbar hflex="true">
+                    <toolbarbutton label="Enero" onClick="updateSubPage(self.label)" />
+                    <toolbarbutton label="Febrero" onClick="updateSubPage(self.label)" />
+                    <toolbarbutton label="Marzo" onClick="updateSubPage(self.label)" />
+                    <toolbarbutton label="Abril" onClick="updateSubPage(self.label)" />
+                    <toolbarbutton label="Mayo" onClick="updateSubPage(self.label)" />
+                    <toolbarbutton label="Junio" onClick="updateSubPage(self.label)" />
+                    <toolbarbutton label="Julio" onClick="updateSubPage(self.label)" />
+                    <toolbarbutton label="Agosto" onClick="updateSubPage(self.label)" />
+                    <toolbarbutton label="Septiembre" onClick="updateSubPage(self.label)" />
+                    <toolbarbutton label="Octubre" onClick="updateSubPage(self.label)" />
+                    <toolbarbutton label="Noviembre" onClick="updateSubPage(self.label)" />
+                    <toolbarbutton label="Diciembre" onClick="updateSubPage(self.label)" />
+                </toolbar>
+                <grid width="1600px">
+   					<columns>
+   						<column width="40%" />
+   						<column width="10%" />
+   						<column width="10"/>
+   						<column width="25"/>
+   						<column width="15"/>
+   					</columns>
+   					<rows>
+   						<row>
+   			    			<cell align="center" colspan="5">
+   			    				<label value="DECLARACION DE NUEVA TRANSACCIÓN"></label>
+   			    			</cell>
+   			    		</row>
+   						<row>
+   							<textbox id="txNuevoNombre1" value="Escriba el nombre de la nueva transacción" maxlength="255" width="625px" constraint="no empty"/>
+   							<radiogroup id="transmissionRadiogroup">
+                    			<hlayout>
+                        			<radio id="automaticRadio" label="Abono"
+                           				 selected="" />
+                        			<radio id="manualRadio" label="Cargo"
+                            			selected="" />
+                    			</hlayout>
+                			</radiogroup>
+              				<intbox id="txNuevoMonto"  maxlength="255" width="185px" constraint="no empty"/>
+              				<hbox>
+    							<datebox id="in" onChange="cal.value = in.value" maxlength="255" width="185px" constraint="no empty" />
+							</hbox>
+   							<button id="btnNuevoAgregar" label="Agregar" width="140px" />
+                            	
+   						</row>
+   						<row>
+   							<cell colspan="5">
+   								 <hlayout>
+							        <label id="current_category" sclass="nav_text nav_category" onClick='updateSubPage("Index")'>Our Product</label>
+							        <label sclass="nav_text">-</label>
+							        <label id="current_subpage" sclass="nav_text">Index</label>
+							    </hlayout>
+   							</cell>
+   						</row>
+   					</rows>
+   				</grid>
+   				
+                <listbox id="list" rows="8" model="@{win$composer.mailData.mails}" checkmark="true">
+	        		<listhead>
+	        			<listheader width="32px" />
+	            		<listheader label="Fecha" sort="auto" width="185px"/>
+	            		<listheader label="Nombre" sort="auto" />
+	            		<listheader label="Abono" sort="auto" width="185px"/>
+	            		<listheader label="Cargo" sort="auto" width="185px"/>
+	            		<listheader label="Saldo" sort="auto" width="185px"/>
+	        		</listhead>
+	        	</listbox>
+	        	<grid>
+	        		<columns>
+	        			<column />
+	        			<column />
+	        		</columns>
+	        		<rows>
+	        			<row>
+	        				<cell valign="top">
+	        					<button label="Eliminar"  />
+	        				</cell>
+	        				<cell align="right">
+	        					<grid width="300px">
+				   					<columns>
+				   						<column width="35%" />
+				   						<column width="65%" />
+				   					</columns>
+				   					<rows>
+				   			    		<row>
+				   			    			<cell align="center" colspan="2">
+				   			    				<label value="Sumas Totales"></label>
+				   			    			</cell>
+				   			    		</row>
+				   						<row>
+				   							<label value="Totales Abono" />
+				   							<intbox id="txTotalesAbono" width="170px" disabled="true"/> 
+				   						</row>
+				   						<row>
+				   							<label value="Totales Cargo" />
+				   							<intbox id="txTotalesCargo" width="170px" disabled="true"/>
+				   						</row>
+				   				
+					        		</rows>
+					        	</grid>
+	        				</cell>
+	        			</row>
+	        		</rows>
+	        	</grid>
+	      					
+            </tabpanel>
+        </tabpanels>
+    </tabbox>
+    <separator height="30px"></separator>
+    <zscript><![CDATA[
+        void updateCategory(String category) {
+            current_category.setValue(category);
+            current_subpage.setValue("Index");
+        }
+        void updateSubPage(String sub) {
+            current_subpage.setValue(sub);
+        }
+    ]]></zscript>
+
+        				
+    </window>
+</zk>

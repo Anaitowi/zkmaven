@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Specification-Title: zkmaven
+Specification-Version: 0.0.1-SNAPSHOT
+Implementation-Title: zkmaven.zkmaven
+Implementation-Version: 0.0.1-SNAPSHOT
